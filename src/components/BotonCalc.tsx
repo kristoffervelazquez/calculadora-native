@@ -5,13 +5,14 @@ import React from 'react'
 interface Props {
     texto: string,
     color?: | '#9B9B9B' | '#2D2D2D' | '#FF9427',
-    ancho?: boolean
+    ancho?: boolean,
+    action: (numero: string) => void;
 }
 
 
-const BotonCalc = ({ texto, color = '#2D2D2D', ancho = false }: Props) => {
+const BotonCalc = ({ texto, color = '#2D2D2D', ancho = false, action }: Props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {action(texto)}}>
             <View style={{ ...styles.boton, backgroundColor: color, width: (ancho ? 180 : 80) }}>
                 <Text style={{ ...styles.botonTexto, color: (color === '#9B9B9B' ? 'black' : 'white') }}>{texto}</Text>
             </View>

@@ -1,42 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { styles } from '../theme/appTheme';
 import BotonCalc from '../components/BotonCalc';
 
 const CalculadoraScreen = () => {
+
+
+    const [numero, setNumero] = useState('0');
+    const [numeroAnterior, setNumeroAnterior] = useState('0');
+
+
+
+    const limpiar = () => {
+        setNumero('0');
+        setNumeroAnterior('0')
+    }
+
+
+    const armarNumero = (numeroTexto: string) => {
+        setNumero(numero + numeroTexto)
+    }
+
     return (
         <View style={styles.calculadoraContainer}>
-            <Text style={styles.resultadoSmall}>1500.000</Text>
-            <Text style={styles.resultado}>1,500.000</Text>
+            <Text style={styles.resultadoSmall}>{numeroAnterior}</Text>
+            <Text style={styles.resultado} numberOfLines={1} adjustsFontSizeToFit>{numero}</Text>
             {/* Fila de botones */}
             <View style={styles.fila}>
-                <BotonCalc texto='C' color='#9B9B9B' />
-                <BotonCalc texto='+/-' color='#9B9B9B' />
-                <BotonCalc texto='DEL' color='#9B9B9B' />
-                <BotonCalc texto='/' color='#FF9427' />
+                <BotonCalc texto='C' color='#9B9B9B' action={limpiar} />
+                <BotonCalc texto='+/-' color='#9B9B9B' action={limpiar}/>
+                <BotonCalc texto='DEL' color='#9B9B9B' action={limpiar}/>
+                <BotonCalc texto='/' color='#FF9427' action={limpiar}/>
             </View>
             <View style={styles.fila}>
-                <BotonCalc texto='7' />
-                <BotonCalc texto='8' />
-                <BotonCalc texto='9' />
-                <BotonCalc texto='X' color='#FF9427' />
+                <BotonCalc texto='7' action={armarNumero} />
+                <BotonCalc texto='8' action={armarNumero}/>
+                <BotonCalc texto='9' action={armarNumero}/>
+                <BotonCalc texto='X' color='#FF9427' action={limpiar}/>
             </View>
             <View style={styles.fila}>
-                <BotonCalc texto='4' />
-                <BotonCalc texto='5' />
-                <BotonCalc texto='6' />
-                <BotonCalc texto='-' color='#FF9427' />
+                <BotonCalc texto='4' action={armarNumero}/>
+                <BotonCalc texto='5' action={armarNumero}/>
+                <BotonCalc texto='6' action={armarNumero}/>
+                <BotonCalc texto='-' color='#FF9427' action={limpiar}/>
             </View>
             <View style={styles.fila}>
-                <BotonCalc texto='1' />
-                <BotonCalc texto='2' />
-                <BotonCalc texto='3' />
-                <BotonCalc texto='+' color='#FF9427' />
+                <BotonCalc texto='1' action={armarNumero}/>
+                <BotonCalc texto='2' action={armarNumero}/>
+                <BotonCalc texto='3' action={armarNumero}/>
+                <BotonCalc texto='+' color='#FF9427' action={limpiar} />
             </View>
             <View style={styles.fila}>
-                <BotonCalc texto='0' ancho />
-                <BotonCalc texto='+/-' />
-                <BotonCalc texto='=' color='#FF9427' />
+                <BotonCalc texto='0' ancho action={armarNumero} />
+                <BotonCalc texto='+/-' action={limpiar}/>
+                <BotonCalc texto='=' color='#FF9427' action={limpiar}/>
             </View>
         </View>
     )
